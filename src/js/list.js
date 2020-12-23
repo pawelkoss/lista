@@ -20,7 +20,7 @@ printItem = function () {
     el.classList.add('list-group-item-primary');
     el.innerHTML = `
         <div class="d-flex">
-            <div class="me-auto me-2">${product.prod} <span class="badge primary">${product.pcs} szt</span> <div class="small">${product.cat}</div></div>
+            <div class="me-auto me-2">${product.prod} <span class="badge bg-primary">${product.pcs} szt</span> <div class="small">${product.cat}</div></div>
             <div class="me-2"><i class="fas fa-edit fa-sm"></i></div>
             <div><a href="#" onclick="delItem(${i});return false;"><i class="fas fa-trash fa-sm"></i></a></div>
         </div>`;
