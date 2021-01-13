@@ -11,6 +11,7 @@ class Product {
 }
 
 printItem = function () {
+  document.getElementById('myList').innerHTML = '';
   for (let i = 0; i < productList.length; i++) {
     const product = productList[i];
 
@@ -19,10 +20,15 @@ printItem = function () {
     el.classList.add('list-group-item');
     el.classList.add('list-group-item-primary');
     el.innerHTML = `
+      <div id="listItem${i}">
         <div class="d-flex">
             <div class="me-auto me-2">${product.prod} <span class="badge bg-primary">${product.pcs} szt</span> <div class="small">${product.cat}</div></div>
-            <div class="me-2"><i class="fas fa-edit fa-sm"></i></div>
+            <div class="me-2"><a href="#" onclick="showEdit(${i});return false;"><i class="fas fa-edit fa-sm" ></i></a></div>
             <div><a href="#" onclick="delItem(${i});return false;"><i class="fas fa-trash fa-sm"></i></a></div>
+        </div>
+      </div>
+        <div id="listEdit${i}" class="form-control-sm" style="display:none">
+        <input type="text" id="name${i}" value="${product.prod}"> szt:<input type="text" id="pcs${i}" size=2 value="${product.pcs}"><i class="fas fa-save fa-lg m-2" onclick="editItem(${i})"></i>
         </div>`;
     // el.setAttribute("title", item);
     // el.style.setProperty("padding", "5px");
@@ -30,6 +36,7 @@ printItem = function () {
 
     const div = document.getElementById('myList');
     div.appendChild(el);
+    
     // console.log(product.prod);
   }
 };
@@ -58,6 +65,17 @@ window.delItem = function (index) {
   printItem();
 };
 
-window.editItem = function (index) {};
+window.editItem = function (index) {
+
+  productList[index].prod = document.querySelector(`#name${index}`).value;
+  productList[index].pcs = document.querySelector(`#pcs${index}`).value;
+  printItem();
+  
+};
+
+window.showEdit = function (index) {
+  document.querySelector(`#listItem${index}`).style.display = "none";
+  document.querySelector(`#listEdit${index}`).style.display = "block";
+  }
 
 countItem = function () {};
